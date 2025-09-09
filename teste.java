@@ -30,6 +30,16 @@ public class teste {
 
         System.out.println(media);
         
+        for (int i = 0; i < vetor.length; i++) {
+            int numero = LerNumInt();
 
+            if(numero%2 == 0) {
+                Pares(indicepar++) = Numero;
+
+                if (indicepar == 5) {
+                    ImprimirVetor()
+                    int indicepar = 0;
+                }
+        }
     }
 }
