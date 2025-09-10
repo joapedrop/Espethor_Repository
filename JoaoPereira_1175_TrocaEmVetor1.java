@@ -30,7 +30,6 @@ public class JoaoPereira_1175_TrocaEmVetor1 {
             System.out.print("N[" + i + "] = " + v[i]);
             System.out.println();
         }
-        System.out.println();
 
     }
 

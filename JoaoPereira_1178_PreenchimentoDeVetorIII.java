@@ -26,9 +26,8 @@ public class JoaoPereira_1178_PreenchimentoDeVetorIII {
     public static void ImprimirVetor(double[] v) {
 
         for (int i = 0; i < v.length; i++) {
-            System.out.printf("N[%d] = %.4f\n ",i,  v[i]);
+            System.out.printf("N[%d] = %.4f\n",i,  v[i]);
         }
-        System.out.println();
 
     }
 
