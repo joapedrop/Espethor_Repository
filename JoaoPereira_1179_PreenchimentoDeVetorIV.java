@@ -9,9 +9,9 @@ public class JoaoPereira_1179_PreenchimentoDeVetorIV {
         return numero;
     }
 
-    public static void ImprimirVetor(int[] v, String tipo) {
-        for (int i = 0; i < v.length; i++) {
-            System.out.printf("%d[%d] =  %d ", tipo, i, v[i]);
+    public static void ImprimirVetor(int[] v, String tipo,int indice) {
+        for (int i = 0; i < indice; i++) {
+            System.out.printf("%s[%d] = %d\n", tipo, i, v[i]);
         }
     }
 
@@ -33,7 +33,7 @@ public class JoaoPereira_1179_PreenchimentoDeVetorIV {
                 indicepar++;
 
                 if (indicepar == 5) {
-                    ImprimirVetor(Pares, "par");
+                    ImprimirVetor(Pares, "par", indicepar);
                     indicepar = 0;
                 }
             }
@@ -41,11 +41,16 @@ public class JoaoPereira_1179_PreenchimentoDeVetorIV {
                 Impares[indiceimpar] = numero;
                 indiceimpar++;
                 if (indiceimpar == 5) {
-                    ImprimirVetor(Impares, "impar");
+                    ImprimirVetor(Impares, "impar", indiceimpar);
                     indiceimpar = 0;
                 }
             }
+            if (i == 14) {
 
+            ImprimirVetor(Impares, "impar", indiceimpar);
+
+            ImprimirVetor(Pares, "par", indicepar);
+            }
         }
     }
 }
