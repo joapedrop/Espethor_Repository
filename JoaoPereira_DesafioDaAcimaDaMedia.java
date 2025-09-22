@@ -83,6 +83,13 @@ public class JoaoPereira_DesafioDaAcimaDaMedia {
         return aalunosreprovados;
     }
 
+    public static void ImprimirResposta(double mediaturma, int[] aalunosreprovados) {
+        System.out.println("Média turma:" + mediaturma);
+        for (int i = 0; i < aalunosreprovados.length; i++) {
+            System.out.printf("%s\n", aalunosreprovados);
+        }
+    }
+
     public static void main(String[] args) {
         int qtddealunos = 0;
 
@@ -100,5 +107,6 @@ public class JoaoPereira_DesafioDaAcimaDaMedia {
 
         int[] aalunosreprovados = VerificarAlunosReprovados(mediaalunos, mediaturma, qtddealunos, nota1, nota2);
 
+        ImprimirResposta(mediaturma, aalunosreprovados);
     }
 }

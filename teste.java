@@ -1,45 +1,32 @@
 public class teste {
     static java.util.Scanner ler = new java.util.Scanner(System.in);
 
-    public static int LerNumInt() {
-        int numero = 0;
+     public static String LerNome() {
+        String numero = null;
 
-        numero = ler.nextInt();
+        numero = ler.next();
 
         return numero;
     }
 
-    public static void main(String[] args) {
-        int quantidade = 0;
-        int soma = 0;
-        int media = 0;
-        quantidade = LerNumInt();
-        int[] vetor = new int[quantidade];
-        for (int i = 0; i < quantidade; i++) {
-            vetor[i] = LerNumInt();
-        }
-        int tamanho = vetor.length;
+    public static String[] CriarVetor(int tamanho) {
+        String [] vetor = new String[tamanho];
 
         for (int i = 0; i < tamanho; i++) {
-            soma += vetor[i];
-
-         System.out.println(i + " | " + vetor[i] + " | " + soma );
+            vetor[i] = LerNome();
         }
 
-        media = soma / tamanho;
+        return vetor;
+    }
 
-        System.out.println(media);
+    public static void main(String[] args) {
+        int tamanho = 6;
         
-        for (int i = 0; i < vetor.length; i++) {
-            int numero = LerNumInt();
+        String[] nome = CriarVetor(tamanho);
 
-            if(numero%2 == 0) {
-                Pares(indicepar++) = Numero;
-
-                if (indicepar == 5) {
-                    ImprimirVetor()
-                    int indicepar = 0;
-                }
+        System.out.println("nomes:");
+        for (int i = 0; i < nome.length; i++) {
+            System.out.printf("%s\n", nome[i]);
         }
     }
 }
