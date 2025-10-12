@@ -13,10 +13,10 @@ public class Matriz {
      * matriz tem colunas e linhas e os espaços são chamados de celulas
      * 0 1 2 3 4 5 6
      * 1|-----------|
-     * 2| |
-     * 3| |
-     * 4| |
-     * 5| |
+     * 2|           |
+     * 3|           | 
+     * 4|           |
+     * 5|           |
      * 6|-----------|
      */
 
