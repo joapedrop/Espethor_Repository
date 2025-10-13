@@ -62,10 +62,10 @@ public class batalhanaval {
                     System.out.print("\t" + "~");
                 } else {
                     if (tabuleiro[linha][coluna] == 0) {
-                        System.out.println("\t" + "*");
+                        System.out.print("\t" + "*");
                     } else {
                         if (tabuleiro[linha][coluna] == 1) {
-                            System.out.println("\t" + "X");
+                            System.out.print("\t" + "X");
                         }
                     }
                 }
@@ -94,15 +94,15 @@ public class batalhanaval {
         torpedo[1]--;
     }
 
-    public static boolean Acertou(boolean acertousimounao, int[][] navios, int[] torpedo) {
+    public static boolean Acertou(int[][] navios, int[] torpedo) {
         for (int navio = 0; navio < navios.length; navio++) {
             if (torpedo[0] == navios[navio][0] && torpedo[1] == navios[navio][1]) {
                 System.out.printf("Você acertou o torpedo (%d,%d)\n", torpedo[0] + 1, torpedo[1] + 1);
-                acertousimounao = true;
+                return true;
             }
         }
 
-        return acertousimounao;
+        return false;
     }
 
     public static void AlterarTabuleiro(boolean acertousimounao, int[][] tabuleiro, int[] torpedo) {
@@ -158,19 +158,25 @@ public class batalhanaval {
         do {
             System.out.println();
             System.out.printf("turno do %s\n", nomejogador1);
-            boolean acertousimounao = false;
+
             imagemdotabuleiro(tabuleirojogador2, nomejogador1);
             AtirarTorpedo(torpedojogador1);
             tentativasjogador1++;
 
-            if (Acertou(acertousimounao, naviosJogador2, torpedojogador1)) {
-                Dica(naviosJogador2, torpedojogador1, tentativasjogador1);
+            boolean acertouJogador1 = Acertou(naviosJogador2, torpedojogador1);
+
+            if (acertouJogador1) {
                 acertosJogador1++;
+                if (acertosJogador1 != 3) {
+                    Dica(naviosJogador2, torpedojogador1, tentativasjogador1);
+                }
             } else {
                 Dica(naviosJogador2, torpedojogador1, tentativasjogador1);
             }
 
-            AlterarTabuleiro(acertousimounao, tabuleirojogador2, torpedojogador1);
+            AlterarTabuleiro(acertouJogador1, tabuleirojogador2, torpedojogador1);
+
+            System.out.println("------------------------------------------");
 
             System.out.println();
             System.out.printf(" turno do %s\n", nomejogador2);
@@ -178,22 +184,32 @@ public class batalhanaval {
             AtirarTorpedo(torpedojogador2);
             tentativasjogador2++;
 
-            if (Acertou(acertousimounao, naviosJogador1, torpedojogador2)) {
-                Dica(naviosJogador1, torpedojogador2, tentativasjogador2);
+            boolean acertouJogador2 = Acertou(naviosJogador1, torpedojogador2);
+
+            if (acertouJogador2) {
                 acertosJogador2++;
+                if (acertosJogador2 != 3) {
+                    Dica(naviosJogador1, torpedojogador2, tentativasjogador2);
+                }
             } else {
                 Dica(naviosJogador1, torpedojogador2, tentativasjogador2);
             }
 
-            AlterarTabuleiro(acertousimounao, tabuleirojogador1, torpedojogador2);
-        } while (acertosJogador1 < 3 && acertosJogador2 < 3);
+            AlterarTabuleiro(acertouJogador2, tabuleirojogador1, torpedojogador2);
 
+            System.out.println("------------------------------------------");
+
+        } while (acertosJogador1 < 3 && acertosJogador2 < 3);
+        System.out.println();
+        System.out.println("Vencedor: ");
         if (acertosJogador1 == 3) {
             System.out.printf("%s venceu", nomejogador1);
         } else {
             System.out.printf("%s venceu", nomejogador2);
 
         }
+
+        System.out.println("Fim do jogo");
     }
 
 }
