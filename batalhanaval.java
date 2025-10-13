@@ -49,7 +49,7 @@ public class batalhanaval {
     public static void imagemdotabuleiro(int[][] tabuleiro, String nome) {
         System.out.println("Nenhum tiro foi dado naquele bloco = ~");
         System.out.println("O torpedo foi atirado e não havia nada = *");
-        System.out.printf("o %s atirou o torpedo e tinha um navio lá = X");
+        System.out.printf("o %s atirou o torpedo e tinha um navio lá = X", nome);
         System.out.println("\t1 \t2 \t3 \t4 \t5");
         System.out.println();
 
@@ -157,7 +157,7 @@ public class batalhanaval {
         do {
             System.out.println();
             System.out.printf("turno do %s\n", nomejogador1);
-            imagemdotabuleiro(tabuleirojogador2, nomejogador1);
+            imagemdotabuleiro(tabuleirojogador2,nomejogador1);
             AtirarTorpedo(torpedojogador1);
             tentativasjogador1++;
 
@@ -172,7 +172,7 @@ public class batalhanaval {
 
             System.out.println();
             System.out.printf(" turno do %s\n", nomejogador2);
-            imagemdotabuleiro(tabuleirojogador1, nomejogador2);
+            imagemdotabuleiro(tabuleirojogador1,nomejogador2);
             AtirarTorpedo(torpedojogador2);
             tentativasjogador2++;
 
