@@ -46,7 +46,10 @@ public class batalhanaval {
         }
     }
 
-    public static void imagemdotabuleiro(int[][] tabuleiro) {
+    public static void imagemdotabuleiro(int[][] tabuleiro, String nome) {
+        System.out.println("Nenhum tiro foi dado naquele bloco = ~");
+        System.out.println("O torpedo foi atirado e não havia nada = *");
+        System.out.printf("o %s atirou o torpedo e tinha um navio lá = X");
         System.out.println("\t1 \t2 \t3 \t4 \t5");
         System.out.println();
 
@@ -79,6 +82,52 @@ public class batalhanaval {
         System.out.println();
     }
 
+    public static void AtirarTorpedo(int[] torpedo) {
+        System.out.print("Linha: ");
+        torpedo[0] = LerNumInt();
+        torpedo[0]--;
+
+        System.out.println("Coluna: ");
+        torpedo[1] = LerNumInt();
+        torpedo[1]--;
+    }
+
+    public static boolean Acertou(int[][] navios, int[] torpedo) {
+
+        for (int navio = 0; navio < navios.length; navio++) {
+            if (torpedo[0] == navios[navio][0] && torpedo[1] == navios[navio][1]) {
+                System.out.printf("Você acertou o torpedo (%d,%d)\n", torpedo[0] + 1, torpedo[1] + 1);
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public static void AlterarTabuleiro(int[][] navios, int[][] tabuleiro, int[] torpedo) {
+        if (Acertou(navios, torpedo)) {
+            tabuleiro[torpedo[0]][torpedo[1]] = 1;
+        } else {
+            tabuleiro[torpedo[0]][torpedo[1]] = 0;
+        }
+    }
+
+    public static void Dica(int[][] navios, int[] torpedo, int tentativas) {
+        int linha = 0;
+        int coluna = 0;
+
+        for (int fila = 0; fila < navios.length; fila++) {
+            if (navios[fila][0] == torpedo[0]) {
+                linha++;
+            }
+            if (navios[fila][1] == torpedo[0]) {
+                coluna++;
+            }
+        }
+        System.out.printf("\n Dica %d: \nLinha %d -> %d Navios\n" + "Coluna %d -> %d Navios\n", tentativas,
+                torpedo[0] + 1, linha, torpedo[1] + 1, coluna);
+    }
+
     public static void main(String[] args) {
         int[][] tabuleirojogador1 = new int[5][5];
         int[][] tabuleirojogador2 = new int[5][5];
@@ -86,8 +135,8 @@ public class batalhanaval {
         int[][] naviosJogador2 = new int[3][2];
         int[] torpedojogador1 = new int[2];
         int[] torpedojogador2 = new int[2];
-        int tentavivasjogador1 = 0;
-        int tentavivasjogador2 = 0;
+        int tentativasjogador1 = 0;
+        int tentativasjogador2 = 0;
         int acertosJogador1 = 0;
         int acertosJogador2 = 0;
         String nomejogador1 = null;
@@ -108,11 +157,33 @@ public class batalhanaval {
         do {
             System.out.println();
             System.out.printf("turno do %s\n", nomejogador1);
-            imagemdotabuleiro(tabuleirojogador2);
+            imagemdotabuleiro(tabuleirojogador2, nomejogador1);
+            AtirarTorpedo(torpedojogador1);
+            tentativasjogador1++;
+
+            if (Acertou(naviosJogador2, torpedojogador1)) {
+                Dica(naviosJogador2, torpedojogador1, tentativasjogador1);
+                acertosJogador1++;
+            } else {
+                Dica(naviosJogador2, torpedojogador1, tentativasjogador1);
+            }
+
+            AlterarTabuleiro(naviosJogador2, tabuleirojogador2, torpedojogador1);
 
             System.out.println();
             System.out.printf(" turno do %s\n", nomejogador2);
-            imagemdotabuleiro(tabuleirojogador1);
+            imagemdotabuleiro(tabuleirojogador1, nomejogador2);
+            AtirarTorpedo(torpedojogador2);
+            tentativasjogador2++;
+
+            if (Acertou(naviosJogador1, torpedojogador2)) {
+                Dica(naviosJogador1, torpedojogador2, tentativasjogador2);
+                acertosJogador2++;
+            } else {
+                Dica(naviosJogador1, torpedojogador2, tentativasjogador2);
+            }
+
+            AlterarTabuleiro(naviosJogador1, tabuleirojogador1, torpedojogador2);
         } while (acertosJogador1 < 3 && acertosJogador2 < 3);
 
         if (acertosJogador1 == 3) {
