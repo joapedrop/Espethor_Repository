@@ -1,3 +1,5 @@
+import java.util.Random;
+
 public class Matriz {
     static java.util.Scanner ler = new java.util.Scanner(System.in);
 
@@ -13,20 +15,20 @@ public class Matriz {
      * matriz tem colunas e linhas e os espaços são chamados de celulas
      * 0 1 2 3 4 5 6
      * 1|-----------|
-     * 2|           |
-     * 3|           | 
-     * 4|           |
-     * 5|           |
+     * 2| |
+     * 3| |
+     * 4| |
+     * 5| |
      * 6|-----------|
      */
 
     public static int[][] CriarMatriz(int T, int L) {
-
+        Random sorteio = new Random();
         int[][] M = new int[T][L];
 
         for (int i = 0; i < T; i++) {
             for (int j = 0; j < L; j++) {
-                M[i][j] = LerNumInt();
+                M[i][j] = sorteio.nextInt(100);
             }
         }
         return M;
@@ -93,6 +95,67 @@ public class Matriz {
         }
     }
 
+    public static void ImprimirDiagonalPrincipal(int[][] M) {
+        int[] diagonal = new int[3];
+
+        for (int i = 0; i < M.length; i++) {
+            for (int j = 0; j < M[i].length; j++) {
+                if (j == i) {
+                    diagonal[j] = M[i][j];
+                }
+            }
+        }
+        System.out.println("Diagnal da Matriz: ");
+        for (int i = 0; i < diagonal.length; i++) {
+            System.out.println(" " + diagonal[i]);
+        }
+
+    }
+
+    public static void ImprimirAcimaDaDiagonal(int[][] M) {
+        int soma = 0;
+        int qtddeelementos = 0;
+        int media = 0;
+
+        for (int i = 0; i < M.length; i++) {
+            for (int j = 0; j < M[i].length; j++) {
+                if (j > i) {
+                    soma += M[i][j];
+                    qtddeelementos++;
+                }
+            }
+        }
+
+        System.out.printf("Soma acima da diagonal: %d\n", soma);
+
+        media = soma / qtddeelementos;
+
+        System.out.printf("Media acima da diagonal principal: %d\n", media);
+
+    }
+
+    public static void ImprimirAbaixoDaDiagonal(int[][] M) {
+        int soma = 0;
+        int qtddeelementos = 0;
+        int media = 0;
+
+        for (int i = 0; i < M.length; i++) {
+            for (int j = 0; j < M[i].length; j++) {
+                if (j < i) {
+                    soma += M[i][j];
+                    qtddeelementos++;
+                }
+            }
+        }
+
+        System.out.printf("Soma abaixo da diagonal: %d\n", soma);
+
+        media = soma / qtddeelementos;
+
+        System.out.printf("Media abaixo da diagonal principal: %d\n", media);
+
+    }
+
     public static void main(String[] args) {
         int tamanho = 3;
         int largura = 3;
@@ -114,5 +177,17 @@ public class Matriz {
         ImprimirElementoPosicao(matriz);
 
         ImprimirSomaCadaLinha(matriz);
+
+        ImprimirDiagonalPrincipal(matriz);
+
+        System.out.println();
+        System.out.println("ACIMA");
+
+        ImprimirAcimaDaDiagonal(matriz);
+
+        System.out.println();
+        System.out.println("ABAIXO");
+
+        ImprimirAbaixoDaDiagonal(matriz);
     }
 }
