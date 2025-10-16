@@ -28,6 +28,13 @@ public class batalhanaval {
 
     }
 
+    public static void limparTela() {
+        for (int i = 0; i < 40; ++i) {
+            System.out.println();
+        }
+        System.out.print("\033\143");
+    }
+
     public static void PosicionarNavios(int[][] navios) {
         Random aleatorio = new Random();
 
@@ -113,7 +120,7 @@ public class batalhanaval {
         }
     }
 
-    public static void Dica(int[][] navios, int[] torpedo, int tentativas) {
+    public static void Dica(int[][] navios, int[] torpedo, int tentativas, String nome) {
         int linha = 0;
         int coluna = 0;
 
@@ -125,87 +132,91 @@ public class batalhanaval {
                 coluna++;
             }
         }
-        System.out.printf("\n Dica %d: \nLinha %d -> %d Navios\n" + "Coluna %d -> %d Navios\n", tentativas,
+        System.out.printf("\n Dica %d do %s: \nLinha %d -> %d Navio(s)\n" + "Coluna %d -> %d Navio(s)\n", tentativas, nome,
                 torpedo[0] + 1, linha, torpedo[1] + 1, coluna);
     }
 
     public static void main(String[] args) {
-        int[][] tabuleirojogador1 = new int[5][5];
-        int[][] tabuleirojogador2 = new int[5][5];
-        int[][] naviosJogador1 = new int[3][2];
-        int[][] naviosJogador2 = new int[3][2];
-        int[] torpedojogador1 = new int[2];
-        int[] torpedojogador2 = new int[2];
-        int tentativasjogador1 = 0;
-        int tentativasjogador2 = 0;
-        int acertosJogador1 = 0;
-        int acertosJogador2 = 0;
-        String nomejogador1 = null;
-        String nomejogador2 = null;
+        int[][] tabuleiroJ1 = new int[5][5];
+        int[][] tabuleiroJ2 = new int[5][5];
+        int[][] naviosJ1 = new int[3][2];
+        int[][] naviosJ2 = new int[3][2];
+        int[] torpedoJ1 = new int[2];
+        int[] torpedoJ2 = new int[2];
+        int tentandoJ1 = 0;
+        int tentandoJ2 = 0;
+        int acertosJ1 = 0;
+        int acertosJ2 = 0;
+        String nomeJ1 = null;
+        String nomeJ2 = null;
 
         regras();
         System.out.println("digite o nome do jogador 1");
-        nomejogador1 = LerNome();
+        nomeJ1 = LerNome();
         System.out.println();
         System.out.println("digite o nome do jogador 2");
-        nomejogador2 = LerNome();
+        nomeJ2 = LerNome();
 
-        Criartabuleiro(tabuleirojogador1);
-        Criartabuleiro(tabuleirojogador2);
-        PosicionarNavios(naviosJogador1);
-        PosicionarNavios(naviosJogador2);
+        limparTela();
+
+        Criartabuleiro(tabuleiroJ1);
+        Criartabuleiro(tabuleiroJ2);
+        PosicionarNavios(naviosJ1);
+        PosicionarNavios(naviosJ2);
 
         do {
             System.out.println();
-            System.out.printf("turno do %s\n", nomejogador1);
+            System.out.printf("turno do %s\n", nomeJ1);
 
-            imagemdotabuleiro(tabuleirojogador2, nomejogador1);
-            AtirarTorpedo(torpedojogador1);
-            tentativasjogador1++;
+            imagemdotabuleiro(tabuleiroJ2, nomeJ1);
+            AtirarTorpedo(torpedoJ1);
+            tentandoJ1++;
 
-            boolean acertouJogador1 = Acertou(naviosJogador2, torpedojogador1);
+            limparTela();
+
+            boolean acertouJogador1 = Acertou(naviosJ2, torpedoJ1);
 
             if (acertouJogador1) {
-                acertosJogador1++;
-                if (acertosJogador1 != 3) {
-                    Dica(naviosJogador2, torpedojogador1, tentativasjogador1);
+                acertosJ1++;
+                if (acertosJ1 != 3) {
+                    Dica(naviosJ2, torpedoJ1, tentandoJ1, nomeJ1);
                 }
             } else {
-                Dica(naviosJogador2, torpedojogador1, tentativasjogador1);
+                Dica(naviosJ2, torpedoJ1, tentandoJ1, nomeJ1);
             }
 
-            AlterarTabuleiro(acertouJogador1, tabuleirojogador2, torpedojogador1);
-
-            System.out.println("------------------------------------------");
+            AlterarTabuleiro(acertouJogador1, tabuleiroJ2, torpedoJ1);
 
             System.out.println();
-            System.out.printf(" turno do %s\n", nomejogador2);
-            imagemdotabuleiro(tabuleirojogador1, nomejogador2);
-            AtirarTorpedo(torpedojogador2);
-            tentativasjogador2++;
+            System.out.printf(" turno do %s\n", nomeJ2);
+            imagemdotabuleiro(tabuleiroJ1, nomeJ2);
+            AtirarTorpedo(torpedoJ2);
+            tentandoJ2++;
 
-            boolean acertouJogador2 = Acertou(naviosJogador1, torpedojogador2);
+            limparTela();
+
+            boolean acertouJogador2 = Acertou(naviosJ1, torpedoJ2);
 
             if (acertouJogador2) {
-                acertosJogador2++;
-                if (acertosJogador2 != 3) {
-                    Dica(naviosJogador1, torpedojogador2, tentativasjogador2);
+                acertosJ2++;
+                if (acertosJ2 != 3) {
+                    Dica(naviosJ1, torpedoJ2, tentandoJ2,nomeJ2);
                 }
             } else {
-                Dica(naviosJogador1, torpedojogador2, tentativasjogador2);
+                Dica(naviosJ1, torpedoJ2, tentandoJ2, nomeJ2);
             }
 
-            AlterarTabuleiro(acertouJogador2, tabuleirojogador1, torpedojogador2);
+            AlterarTabuleiro(acertouJogador2, tabuleiroJ1, torpedoJ2);
 
-            System.out.println("------------------------------------------");
+        
 
-        } while (acertosJogador1 < 3 && acertosJogador2 < 3);
+        } while (acertosJ1 < 3 && acertosJ2 < 3);
         System.out.println();
         System.out.println("Vencedor: ");
-        if (acertosJogador1 == 3) {
-            System.out.printf("%s venceu", nomejogador1);
+        if (acertosJ1 == 3) {
+            System.out.printf("%s venceu", nomeJ1);
         } else {
-            System.out.printf("%s venceu", nomejogador2);
+            System.out.printf("%s venceu", nomeJ2);
 
         }
 
