@@ -29,7 +29,7 @@ public class Vetor4 {
         System.out.println("a do main depois do metodo: " + a);
 
         int [] v4 = CriarVetorAleatorio(5, 10);
-        System.out.println("Vee·
+        System.out.println("Vee");
         AlterarVetorPorReferencia(v4);
         
         System.out.println("Vetor 4 alterado: ");
