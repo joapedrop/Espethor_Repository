@@ -1,6 +1,6 @@
 import java.util.Random;
 
-public class batalhanaval {
+public class BatalhaNaval {
     static java.util.Scanner ler = new java.util.Scanner(System.in);
 
     public static int LerNumInt() {
