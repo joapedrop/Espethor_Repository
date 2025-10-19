@@ -70,9 +70,7 @@ public class TocarSom {
         // Peguei exemplos de : https://freewavesamples.com/
        
         tocarSom_Sino();
-        tocarSom_Ouch();
-        tocarSom_Gato();
-        tocarSom_Crash();
+     
 
         
         

@@ -179,7 +179,7 @@ public class WoW {
 
        
         Thread.sleep(1000); // espera 1000 milissegundos -> 1 segundo
-        setColor(2);
+        setColor(1);
         printIF();
         Thread.sleep(1000); // espera 1000 milissegundos -> 1 segundo
         setColor(3);
