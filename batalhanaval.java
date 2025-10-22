@@ -327,7 +327,7 @@ public class BatalhaNaval {
                     acertosrodadaJ1++;
                 }
             } else {
-                System.out.println("parabens! %s você ganhou um torpedo especial nesta rodada!");
+                System.out.printf("parabens! %s você ganhou um torpedo especial nesta rodada!", nomeJ1);
                 // ATIRA E VERIFICA OS ACERTOS DO TORPEDO ESPECIAL E MUDA O TABULEIRO DO JOGADOR
                 // 2
                 acertosrodadaJ1 = VerificaçãoAtirarTorpedoEspecial(naviosJ2, torpedoJ1, tabuleiroJ2);
@@ -378,7 +378,7 @@ public class BatalhaNaval {
                     acertosrodadaJ2++;
                 }
             } else {
-                System.out.println("parabens! %s você ganhou um torpedo especial nesta rodada!");
+                System.out.printf("parabens! %s você ganhou um torpedo especial nesta rodada!", nomeJ2);
                 // ATIRA E VERIFICA OS ACERTOS DO TORPEDO ESPECIAL E MUDA O TABULEIRO DO JOGADOR
                 // 1
                 acertosrodadaJ2 = VerificaçãoAtirarTorpedoEspecial(naviosJ1, torpedoJ2, tabuleiroJ1);
