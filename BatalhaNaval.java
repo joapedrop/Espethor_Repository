@@ -307,11 +307,11 @@ public class BatalhaNaval {
             System.out.println();
             System.out.printf("turno do %s\n", nomeJ1);
             imagemdotabuleiro(tabuleiroJ2, nomeJ1);
-            boolean torpedonormal = false;
+            boolean torpedonormal = true;
             // VERIFICA SE O TORPEDO É NORMAL OU ESPECIAL(A CADA JOGO VAI TER UM UNICO
             // TORPEDO ESPECIAL)
             if (Ehtorpedonormal(tentativasJ1, numeroaleatorioJ1)) {
-                torpedonormal = true;
+                torpedonormal = false;
             }
 
             AtirarTorpedo(torpedoJ1, torpedosatiradosJ1);
