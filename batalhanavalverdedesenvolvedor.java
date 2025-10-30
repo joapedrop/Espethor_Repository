@@ -2,7 +2,7 @@ import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 
-public class BatalhaNaval {
+public class batalhanavalverdedesenvolvedor {
     static java.util.Scanner ler = new java.util.Scanner(System.in);
 
     public static int LerNumInt() {
@@ -117,6 +117,15 @@ public class BatalhaNaval {
         System.out.println("o jogador atirou o torpedo e tinha um navio lá = X");
         
         System.out.println();
+    }
+
+    public static void mostrarnavios(int [][] navios,String nome) {
+        System.out.printf("barcos do %s\n", nome);
+        for (int i = 0; i < navios.length; i++) {
+            for (int j = 0; j < navios[i].length; j++) {
+                System.out.println("(" + navios[i][j] + ")" );
+            }
+        }
     }
 
     public static void AtirarTorpedo(int[] torpedo, Set<String> torpedosatirados) {
@@ -311,6 +320,7 @@ public class BatalhaNaval {
             // TURNO DO JOGADOR 1
             System.out.println();
             System.out.printf("turno do %s\n", nomeJ1);
+            mostrarnavios(naviosJ2, nomeJ2);
             imagemdotabuleiro(tabuleiroJ2, nomeJ1);
             boolean torpedonormal = true;
             // VERIFICA SE O TORPEDO É NORMAL OU ESPECIAL(A CADA JOGO VAI TER UM UNICO
@@ -364,6 +374,7 @@ public class BatalhaNaval {
             // TURNO DO JOGADOR 2
             System.out.println();
             System.out.printf(" turno do %s\n", nomeJ2);
+            mostrarnavios(naviosJ1, nomeJ1);
             imagemdotabuleiro(tabuleiroJ1, nomeJ2);
             torpedonormal = true;
             // VERIFICA SE O TORPEDO É NORMAL OU ESPECIAL(A CADA JOGO VAI TER UM UNICO
