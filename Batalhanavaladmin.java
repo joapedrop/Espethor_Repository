@@ -2,7 +2,7 @@ import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 
-public class BatalhaNaval {
+public class Batalhanavaladmin {
     static java.util.Scanner ler = new java.util.Scanner(System.in);
 
     public static int LerNumInt() {
@@ -73,6 +73,13 @@ public class BatalhaNaval {
 
         }
 
+    }
+
+    public static void Imprimirinformaçoesnavios(int[][] navios) {
+        for (int i = 0; i < navios.length; i++) {
+            System.out.printf("Navio %d -> Linha: %d , Coluna: %d , Status: %d\n", i + 1, navios[i][0] + 1,
+                    navios[i][1] + 1, navios[i][2]);
+        }
     }
 
     public static void imagemdotabuleiro(int[][] tabuleiro, String nome) {
@@ -284,7 +291,7 @@ public class BatalhaNaval {
         Set<String> torpedosatiradosJ2 = new HashSet<>();
         int acertosrodadaJ1 = 0;
         int acertosrodadaJ2 = 0;
-        int numeroaleatorioJ1 = aleatorio.nextInt(24) + 1;
+        int numeroaleatorioJ1 = aleatorio.nextInt(1) + 1;
         int numeroaleatorioJ2 = aleatorio.nextInt(24) + 1;
 
         regras();
@@ -309,9 +316,11 @@ public class BatalhaNaval {
             imagemdotabuleiro(tabuleiroJ2, nomeJ1);
             acertosrodadaJ1 = 0;
             boolean torpedonormal = true;
+            Imprimirinformaçoesnavios(naviosJ2);
             // VERIFICA SE O TORPEDO É NORMAL OU ESPECIAL(A CADA JOGO VAI TER UM UNICO
             // TORPEDO ESPECIAL)
             if (Ehtorpedonormal(tentativasJ1, numeroaleatorioJ1)) {
+                System.out.printf("parabens! %s você ganhou um torpedo especial nesta rodada!\n", nomeJ1);
                 torpedonormal = false;
             }
 
@@ -328,7 +337,7 @@ public class BatalhaNaval {
                     acertosrodadaJ1++;
                 }
             } else {
-                System.out.printf("parabens! %s você ganhou um torpedo especial nesta rodada!", nomeJ1);
+                
                 // ATIRA E VERIFICA OS ACERTOS DO TORPEDO ESPECIAL E MUDA O TABULEIRO DO JOGADOR
                 // 2
                 acertosrodadaJ1 = VerificaçãoAtirarTorpedoEspecial(naviosJ2, torpedoJ1, tabuleiroJ2);
@@ -343,7 +352,7 @@ public class BatalhaNaval {
             }
 
             if (acertosrodadaJ1 > 0) {
-                System.out.printf("o %s acertou %d navio(s)\n", nomeJ1, acertosJ1);
+                System.out.printf("o %s acertou %d navio(s) nesta rodada\n", nomeJ1, acertosJ1);
                 if (acertosJ1 > 3) {
                     // DÁ UMA DICA AO JOGADOR 1
                     Dica(naviosJ2, torpedoJ1, tentativasJ2);
@@ -365,6 +374,7 @@ public class BatalhaNaval {
             // VERIFICA SE O TORPEDO É NORMAL OU ESPECIAL(A CADA JOGO VAI TER UM UNICO
             // TORPEDO ESPECIAL)
             if (Ehtorpedonormal(tentativasJ2, numeroaleatorioJ2)) {
+                System.out.printf("parabens! %s você ganhou um torpedo especial nesta rodada!\n", nomeJ2);
                 torpedonormal = false;
             }
 
@@ -380,7 +390,7 @@ public class BatalhaNaval {
                     acertosrodadaJ2++;
                 }
             } else {
-                System.out.printf("parabens! %s você ganhou um torpedo especial nesta rodada!", nomeJ2);
+                
                 // ATIRA E VERIFICA OS ACERTOS DO TORPEDO ESPECIAL E MUDA O TABULEIRO DO JOGADOR
                 // 1
                 acertosrodadaJ2 = VerificaçãoAtirarTorpedoEspecial(naviosJ1, torpedoJ2, tabuleiroJ1);
