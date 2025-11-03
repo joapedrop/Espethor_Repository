@@ -2,7 +2,7 @@ import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 
-public class BatalhaNaval {
+public class batalhanavalverdedesenvolvedor {
     static java.util.Scanner ler = new java.util.Scanner(System.in);
 
     public static int LerNumInt() {
@@ -119,6 +119,15 @@ public class BatalhaNaval {
         System.out.println();
     }
 
+    public static void mostrarnavios(int [][] navios,String nome) {
+        System.out.printf("barcos do %s\n", nome);
+        for (int i = 0; i < navios.length; i++) {
+            for (int j = 0; j < navios[i].length; j++) {
+                System.out.println("(" + navios[i][j] + ")" );
+            }
+        }
+    }
+
     public static void AtirarTorpedo(int[] torpedo, Set<String> torpedosatirados) {
         String coordenada = null;
         boolean jaatirou = false;
@@ -160,7 +169,7 @@ public class BatalhaNaval {
                 boolean acertoualvo = false;
 
                 for (int navio = 0; navio < navios.length; navio++) {
-                    if (navios[navio][2] == 0 && linhaalvo == navios[navio][0] && colunaalvo == navios[navio][1]) {
+                    if (navios[navio][2] == 2 && linhaalvo == navios[navio][0] && colunaalvo == navios[navio][1]) {
                         System.out.printf("Você acertou o torpedo especial em (%d,%d)\n", linhaalvo + 1,
                                 colunaalvo + 1);
                         navios[navio][2] = 1;
@@ -311,8 +320,8 @@ public class BatalhaNaval {
             // TURNO DO JOGADOR 1
             System.out.println();
             System.out.printf("turno do %s\n", nomeJ1);
+            mostrarnavios(naviosJ2, nomeJ2);
             imagemdotabuleiro(tabuleiroJ2, nomeJ1);
-            acertosrodadaJ1 = 0;
             boolean torpedonormal = true;
             // VERIFICA SE O TORPEDO É NORMAL OU ESPECIAL(A CADA JOGO VAI TER UM UNICO
             // TORPEDO ESPECIAL)
@@ -349,7 +358,7 @@ public class BatalhaNaval {
             }
 
             if (acertosrodadaJ1 > 0) {
-                System.out.printf("o %s acertou %d navio(s)\n", nomeJ1, acertosJ1);
+                System.out.printf("o %s acertou %d navio(s) nesta rodada\n", nomeJ1, acertosrodadaJ1);
                 if (acertosJ1 > 3) {
                     // DÁ UMA DICA AO JOGADOR 1
                     Dica(naviosJ2, torpedoJ1, tentativasJ1);
@@ -365,8 +374,8 @@ public class BatalhaNaval {
             // TURNO DO JOGADOR 2
             System.out.println();
             System.out.printf(" turno do %s\n", nomeJ2);
+            mostrarnavios(naviosJ1, nomeJ1);
             imagemdotabuleiro(tabuleiroJ1, nomeJ2);
-            acertosrodadaJ2 = 0;
             torpedonormal = true;
             // VERIFICA SE O TORPEDO É NORMAL OU ESPECIAL(A CADA JOGO VAI TER UM UNICO
             // TORPEDO ESPECIAL)
@@ -402,7 +411,7 @@ public class BatalhaNaval {
             }
 
             if (acertosrodadaJ2 > 0) {
-                System.out.printf("o %s acertou %d navio(s)\n", nomeJ2, acertosJ2);
+                System.out.printf("o %s acertou %d navio(s) nesta rodada\n", nomeJ2, acertosrodadaJ2);
                 if (acertosJ2 > 3) {
                     // DÁ UMA DICA AO JOGADOR 2
                     Dica(naviosJ1, torpedoJ2, tentativasJ2);
@@ -419,7 +428,6 @@ public class BatalhaNaval {
         System.out.println("Vencedor: ");
         // DECLARA O VENCEDOR
         if (acertosJ1 == 3) {
-            System.out.printf("%s venceu\n", nomeJ1);
             System.out.printf("%s venceu\n", nomeJ1);
         } else {
             System.out.printf("%s venceu\n", nomeJ2);
