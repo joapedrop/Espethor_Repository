@@ -241,7 +241,7 @@ public class BatalhaNaval {
 
     }
     //gera uma dica se tiver algum navio nesta linha ou coluna
-    public static void Dica(int[][] navios, int[] torpedo, int tentativas) {
+    public static void Dica(int[][] navios, int[] torpedo, int tentativas,String nome) {
         int linha = 0;
         int coluna = 0;
         //verfica se tem algum navio na linha e coluna digitada
@@ -256,7 +256,7 @@ public class BatalhaNaval {
                 }
             }
         }
-        System.out.printf("\n Dica %d: \nLinha %d -> %d Navios\n" + "Coluna %d -> %d Navios\n", tentativas,
+        System.out.printf("\n Dica %d do %s: \nLinha %d ▬▶ %d Navio(s)\n" + "Coluna %d ▬▶ %d Navio(s)\n", tentativas, nome,
                 torpedo[0] + 1, linha, torpedo[1] + 1, coluna);
     }
 
@@ -383,10 +383,10 @@ public class BatalhaNaval {
                 System.out.printf("o %s acertou %d navio(s)\n", nomeJ1, acertosJ1);
                 if (acertosJ1 > 3) {
                     // DÁ UMA DICA AO JOGADOR 1
-                    Dica(naviosJ2, torpedoJ1, tentativasJ1);
+                    Dica(naviosJ2, torpedoJ1, tentativasJ1, nomeJ1);
                 }
             } else {
-                Dica(naviosJ2, torpedoJ1, tentativasJ1);
+                Dica(naviosJ2, torpedoJ1, tentativasJ1, nomeJ1);
             }
 
             if (acertosJ1 == 3) {
@@ -436,10 +436,10 @@ public class BatalhaNaval {
                 System.out.printf("o %s acertou %d navio(s)\n", nomeJ2, acertosJ2);
                 if (acertosJ2 > 3) {
                     // DÁ UMA DICA AO JOGADOR 2
-                    Dica(naviosJ1, torpedoJ2, tentativasJ2);
+                    Dica(naviosJ1, torpedoJ2, tentativasJ2, nomeJ2);
                 }
             } else {
-                Dica(naviosJ1, torpedoJ2, tentativasJ2);
+                Dica(naviosJ1, torpedoJ2, tentativasJ2, nomeJ2);
             }
 
             if (acertosJ2 == 3) {
