@@ -21,11 +21,7 @@ public class teste {
 
     public static void main(String[] args) {
         int tamanho = 6;
-        
-        String[] nome = CriarVetor(tamanho);
-
-        for (int i = 0; i < nome.length; i++) {
-            System.out.printf("%s\n", nome[i]);
-        }
+        g.setFont(new Font())
+      System.out.println("♔ ♕ ♖ ♗ ♘ ♙");
     }
 }
