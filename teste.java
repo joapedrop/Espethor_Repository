@@ -24,7 +24,6 @@ public class teste {
         
         String[] nome = CriarVetor(tamanho);
 
-        System.out.println("nomes:");
         for (int i = 0; i < nome.length; i++) {
             System.out.printf("%s\n", nome[i]);
         }

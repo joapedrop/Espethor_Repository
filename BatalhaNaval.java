@@ -23,6 +23,8 @@ public class BatalhaNaval {
     }
 
     public static void Criartabuleiro(int[][] tabuleiro) {
+        // aqui que é criado tabuleiro e colocado as variaveis de -1 em cada bloco do
+        // vetor
         for (int linha = 0; linha < 5; linha++) {
             for (int coluna = 0; coluna < 5; coluna++) {
                 tabuleiro[linha][coluna] = -1;
@@ -31,18 +33,26 @@ public class BatalhaNaval {
 
     }
 
+    // é o metodo onde é criado a posição dos navios do jogdor 1 e jogador 2 e
+    // tambem é o metodo que reposiciona os navios em novos lugares ele tambem
+    // verfica se nao foi colocado dois navios no mesmo lugar e tambem nao movimeta
+    // os navios que ja foram mortos
     public static void PosicionarNavios(int[][] navios, Set<String> lugaresproibidos, int qtddenavios) {
         Random aleatorio = new Random();
         boolean ehposiçao;
         String coordenada = null;
-
+        /** verifica quais navios estão mortos */
         for (int i = 0; i < qtddenavios; i++) {
             if (navios[i][2] == 1) {
                 lugaresproibidos.add(navios[i][0] + "," + navios[i][1]);
 
             }
         }
-
+        /**
+         * reposiciona os navios e verifca se não foram colocados no mesmo lugar e não
+         * movimenta os navios que ja estão mortos e nem movimenta para onde ja foi
+         * atirado
+         */
         for (int navio = 0; navio < qtddenavios; navio++) {
 
             if (navios[navio][2] == 1) {
@@ -75,24 +85,31 @@ public class BatalhaNaval {
 
     }
 
+    /**
+     * imprime a imagem do tabulerio no termianl e muda o tabuleiro de acordo como
+     * segue o jogo
+     */
     public static void imagemdotabuleiro(int[][] tabuleiro, String nome) {
-
+        // coluna
         System.out.println("\t1 \t2 \t3 \t4 \t5");
         System.out.println();
-
+        // linha
         for (int linha = 0; linha < 5; linha++) {
             setColor(-1);
             System.out.print((linha + 1) + "");
             for (int coluna = 0; coluna < 5; coluna++) {
                 if (tabuleiro[linha][coluna] == -1) {
                     setColor(-1);
+                    // ~ == MAR
                     System.out.print("\t" + "~");
                 } else {
                     if (tabuleiro[linha][coluna] == 0) {
+                        // * == errou
                         setColor(1);
                         System.out.print("\t" + "*");
                     } else {
                         if (tabuleiro[linha][coluna] == 1) {
+                            // X == acertou
                             setColor(2);
                             System.out.print("\t" + "X");
                         }
@@ -104,36 +121,42 @@ public class BatalhaNaval {
         System.out.println();
     }
 
+    /** onde imprime as regras */
     public static void regras() {
         setColor(1);
         System.out.println("bem vindo ao jogo batalha naval");
         System.out.println("as regras são simples:");
         System.out.println("você tera que achar todos os navios do inimigo antes que ele ache os seus");
         System.out.println("será feito em um tabuleior de 5X5");
-        System.out.println("e você e seu inimgo terão 3 navios cada");        
+        System.out.println("e você e seu inimgo terão 3 navios cada");
         System.out.println("Legenda: ");
         System.out.println("Nenhum tiro foi dado naquele bloco = ~");
         System.out.println("O torpedo foi atirado e não havia nada = *");
         System.out.println("o jogador atirou o torpedo e tinha um navio lá = X");
-        
+
         System.out.println();
     }
 
+    /**
+     * o jogador 1 e 2 escolhe onde quer atirar e atira mas não pode ser onde ja
+     * atirou
+     */
     public static void AtirarTorpedo(int[] torpedo, Set<String> torpedosatirados) {
         String coordenada = null;
         boolean jaatirou = false;
         while (!jaatirou) {
-
+            // digita a linha
             System.out.print("Linha: ");
             torpedo[0] = LerNumInt();
             torpedo[0]--;
-
+            // digita a coluna
             System.out.print("Coluna: ");
             torpedo[1] = LerNumInt();
             torpedo[1]--;
 
             coordenada = (torpedo[0] + "," + torpedo[1]);
-
+            // verifica se esta dentro do hashset de torpedos atirados e se nao estiver
+            // adiciona a ele
             if (torpedosatirados.contains(coordenada)) {
                 System.out.printf("você já atirou o torpedo na coordenada (%d,%d), tente outra\n", torpedo[0] + 1,
                         torpedo[1] + 1);
@@ -145,6 +168,8 @@ public class BatalhaNaval {
         }
     }
 
+    // verifica quantos lugares o torpedo especial acertou e retorna quantos ele
+    // acertou
     public static int VerificaçãoAtirarTorpedoEspecial(int[][] navios, int[] torpedo, int[][] tabuleiro) {
         int acertos = 0;
         int centrolinha = torpedo[0];
@@ -155,10 +180,11 @@ public class BatalhaNaval {
         for (int i = 0; i < direçoes.length; i++) {
             int linhaalvo = centrolinha + direçoes[i][0];
             int colunaalvo = centocoluna + direçoes[i][1];
-
+            // verifca se esta dentro dos limites do tabuleiro
             if (linhaalvo >= 0 && linhaalvo < 5 && colunaalvo >= 0 && colunaalvo < 5) {
                 boolean acertoualvo = false;
-
+                // verifica se acertou um navio e verifca se acertou um navio que esta vivo e
+                // altera o tabuleiro e altera o estado para morto se acertou o navio
                 for (int navio = 0; navio < navios.length; navio++) {
                     if (navios[navio][2] == 0 && linhaalvo == navios[navio][0] && colunaalvo == navios[navio][1]) {
                         System.out.printf("Você acertou o torpedo especial em (%d,%d)\n", linhaalvo + 1,
@@ -183,8 +209,10 @@ public class BatalhaNaval {
         return acertos;
     }
 
-    public static boolean Acertou(int[][] navios, int[] torpedo,String nome) {
+    // verifica se o tiro normal acertou o lugar que foi atirado
+    public static boolean Acertou(int[][] navios, int[] torpedo, String nome) {
         for (int navio = 0; navio < navios.length; navio++) {
+            // verifica se acertou o navio e muda o estado dele para morto se acertou
             if (torpedo[0] == navios[navio][0] && torpedo[1] == navios[navio][1]) {
                 System.out.printf("%s acertou o torpedo (%d,%d)\n", nome, torpedo[0] + 1, torpedo[1] + 1);
                 navios[navio][2] = 1;
@@ -194,11 +222,13 @@ public class BatalhaNaval {
 
         return false;
     }
-
+    //altera o tabuleiro se acertou sim ou não
     public static void AlterarTabuleiro(boolean acertousimounao, int[][] tabuleiro, int[] torpedo) {
         if (acertousimounao) {
+            //acertou
             tabuleiro[torpedo[0]][torpedo[1]] = 1;
         } else {
+            //errou
             tabuleiro[torpedo[0]][torpedo[1]] = 0;
         }
     }
@@ -210,11 +240,11 @@ public class BatalhaNaval {
         System.out.print("\033\143");
 
     }
-
+    //gera uma dica se tiver algum navio nesta linha ou coluna
     public static void Dica(int[][] navios, int[] torpedo, int tentativas) {
         int linha = 0;
         int coluna = 0;
-
+        //verfica se tem algum navio na linha e coluna digitada
         for (int fila = 0; fila < navios.length; fila++) {
             if (navios[fila][2] == 0) {
 
@@ -261,8 +291,9 @@ public class BatalhaNaval {
 
         System.out.print((char) 27 + s);
     }
-
+    //verifca se esta na hora do torpedo especial
     public static boolean Ehtorpedonormal(int tentativas, int numeroaleatorio) {
+        //verifca se as tentativas é igual o numero aleatorio gerado especificamnete para o jogador
         if (tentativas == numeroaleatorio) {
             return true;
         }
@@ -334,7 +365,7 @@ public class BatalhaNaval {
                     acertosrodadaJ1++;
                 }
             } else {
-                
+
                 // ATIRA E VERIFICA OS ACERTOS DO TORPEDO ESPECIAL E MUDA O TABULEIRO DO JOGADOR
                 // 2
                 acertosrodadaJ1 = VerificaçãoAtirarTorpedoEspecial(naviosJ2, torpedoJ1, tabuleiroJ2);
@@ -380,14 +411,14 @@ public class BatalhaNaval {
 
             if (torpedonormal) {
                 // VERIFICA SE ACERTOU O NAVIO DO JOGADOR 2
-                boolean acertouJ2 = Acertou(naviosJ1, torpedoJ2,nomeJ2);
+                boolean acertouJ2 = Acertou(naviosJ1, torpedoJ2, nomeJ2);
                 AlterarTabuleiro(acertouJ2, tabuleiroJ1, torpedoJ2);
 
                 if (acertouJ2) {
                     acertosrodadaJ2++;
                 }
             } else {
-                
+
                 // ATIRA E VERIFICA OS ACERTOS DO TORPEDO ESPECIAL E MUDA O TABULEIRO DO JOGADOR
                 // 1
                 acertosrodadaJ2 = VerificaçãoAtirarTorpedoEspecial(naviosJ1, torpedoJ2, tabuleiroJ1);
