@@ -1,4 +1,5 @@
-public class JoaoPereira_1184_AbaixodaDiagonalPrincipal {
+
+public class JoaoPereira_1187_AreaSuperior {
     static java.util.Scanner ler = new java.util.Scanner(System.in);
 
     public static double LerNumDouble() {
@@ -29,30 +30,28 @@ public class JoaoPereira_1184_AbaixodaDiagonalPrincipal {
         return Ma;
     }
 
-    public static double imprimirSomaDiagonalPrincipal(double[][] M, double soma) {
-    
+    public static double imprimirSomaAreaSuperior(double[][] M, double soma) {
 
-        for (int i = 0; i < M.length; i++) {
-            for (int j = 0; j < M[i].length; j++) {
-                if (j > i) {
-                    soma += M[i][j];
-               
-                }
+        for (int i = 0; i < 11; i++) {
+            for (int j = 1 + i; j < 11 - i; j++) {
+
+                soma += M[i][j];
+
             }
         }
         return soma;
     }
 
-    public static double imprimirMediaDiagonalPrincipal(double[][] M, double media) {
-         double soma = 0;
-         int qtddeelementos = 0;
-        
-        for (int i = 0; i < M.length; i++) {
-            for (int j = 0; j < M[i].length; j++) {
-                if (j < i) {
-                    soma += M[i][j];
-                    qtddeelementos++;
-                }
+    public static double imprimirMediaAreaSuperior(double[][] M, double media) {
+        double soma = 0;
+        int qtddeelementos = 0;
+
+        for (int i = 0; i < 11; i++) {
+            for (int j = i + 1; j < 11 - i; j++) {
+
+                soma += M[i][j];
+                qtddeelementos++;
+
             }
         }
 
@@ -72,13 +71,13 @@ public class JoaoPereira_1184_AbaixodaDiagonalPrincipal {
 
         switch (tipo) {
             case 'S':
-                soma = imprimirSomaDiagonalPrincipal(matriz, soma);
+                soma = imprimirSomaAreaSuperior(matriz, soma);
                 System.out.printf("%.1f\n", soma);
 
                 break;
 
             case 'M':
-                media = imprimirMediaDiagonalPrincipal(matriz, media);
+                media = imprimirMediaAreaSuperior(matriz, media);
                 System.out.printf("%.1f\n", media);
                 break;
 

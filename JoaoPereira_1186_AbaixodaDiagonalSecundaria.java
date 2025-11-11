@@ -1,4 +1,5 @@
-public class JoaoPereira_1184_AbaixodaDiagonalPrincipal {
+
+public class JoaoPereira_1186_AbaixodaDiagonalSecundaria {
     static java.util.Scanner ler = new java.util.Scanner(System.in);
 
     public static double LerNumDouble() {
@@ -29,12 +30,12 @@ public class JoaoPereira_1184_AbaixodaDiagonalPrincipal {
         return Ma;
     }
 
-    public static double imprimirSomaDiagonalPrincipal(double[][] M, double soma) {
+    public static double imprimirSomaDiagonalSecundaria(double[][] M, double soma) {
     
 
         for (int i = 0; i < M.length; i++) {
             for (int j = 0; j < M[i].length; j++) {
-                if (j > i) {
+                if (j > (11 - i)) {
                     soma += M[i][j];
                
                 }
@@ -43,13 +44,13 @@ public class JoaoPereira_1184_AbaixodaDiagonalPrincipal {
         return soma;
     }
 
-    public static double imprimirMediaDiagonalPrincipal(double[][] M, double media) {
+    public static double imprimirMediaDiagonalSecundaria(double[][] M, double media) {
          double soma = 0;
          int qtddeelementos = 0;
         
         for (int i = 0; i < M.length; i++) {
             for (int j = 0; j < M[i].length; j++) {
-                if (j < i) {
+                if (j > (11 - i)) {
                     soma += M[i][j];
                     qtddeelementos++;
                 }
@@ -72,13 +73,13 @@ public class JoaoPereira_1184_AbaixodaDiagonalPrincipal {
 
         switch (tipo) {
             case 'S':
-                soma = imprimirSomaDiagonalPrincipal(matriz, soma);
+                soma = imprimirSomaDiagonalSecundaria(matriz, soma);
                 System.out.printf("%.1f\n", soma);
 
                 break;
 
             case 'M':
-                media = imprimirMediaDiagonalPrincipal(matriz, media);
+                media = imprimirMediaDiagonalSecundaria(matriz, media);
                 System.out.printf("%.1f\n", media);
                 break;
 
@@ -88,3 +89,4 @@ public class JoaoPereira_1184_AbaixodaDiagonalPrincipal {
 
     }
 }
+
