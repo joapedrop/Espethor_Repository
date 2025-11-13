@@ -1,4 +1,4 @@
-public class JoaoPereira_1189_AreaEsquerda {
+public class JoaoPereira_1190AreaDireita {
     static java.util.Scanner ler = new java.util.Scanner(System.in);
 
     public static double LerNumDouble() {
@@ -31,21 +31,11 @@ public class JoaoPereira_1189_AreaEsquerda {
 
     public static double imprimirSomaAreaEsquerda(double[][] M, double soma) {
 
-        for (int i = 0; i < 12; i++) {
-            for (int j = 0; j < 12; j++) {
-                if (i < 6) {
-                    if (j < i) {
+        for (int i = 7; i <= 11; i++) {
+            for (int j = 12 - i; j < 12 - j; j++) {
 
-                        soma += M[i][j];
+                soma += M[i][j];
 
-                    }
-                } else {
-
-                    if (j < 11 - i) {
-                        soma += M[i][j];
-
-                    }
-                }
             }
         }
 
@@ -56,21 +46,12 @@ public class JoaoPereira_1189_AreaEsquerda {
         double soma = 0;
         int qtddeelementos = 0;
 
-        for (int i = 0; i < 12; i++) {
-            for (int j = 0; j < 12; j++) {
-                if (i < 6) {
-                    if (j < i) {
+        for (int i = 7; i <= 11; i++) {
+            for (int j = 12 - i; j < 12 - j; j++) {
 
-                        soma += M[i][j];
-                        qtddeelementos++;
-                    }
-                } else {
+                soma += M[i][j];
+                qtddeelementos++;
 
-                    if (j < 11 - i) {
-                        soma += M[i][j];
-                        qtddeelementos++;
-                    }
-                }
             }
         }
 
