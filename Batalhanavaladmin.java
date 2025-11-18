@@ -77,7 +77,7 @@ public class Batalhanavaladmin {
 
     public static void Imprimirinformaçoesnavios(int[][] navios) {
         for (int i = 0; i < navios.length; i++) {
-            System.out.printf("Navio %d -> Linha: %d , Coluna: %d , Status: %d\n", i + 1, navios[i][0] + 1,
+            System.out.printf( "\u001B[96m" +"Navio %d -> Linha: %d , Coluna: %d , Status: %d\n", i + 1, navios[i][0] + 1,
                     navios[i][1] + 1, navios[i][2]);
         }
     }
