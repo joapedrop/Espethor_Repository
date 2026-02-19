@@ -21,7 +21,6 @@ public class teste {
 
     public static void main(String[] args) {
         int tamanho = 6;
-        g.setFont(new Font())
       System.out.println("♔ ♕ ♖ ♗ ♘ ♙");
     }
 }
